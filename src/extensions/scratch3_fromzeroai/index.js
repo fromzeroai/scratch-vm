@@ -73,7 +73,7 @@ class Scratch3FromZeroAi {
                 {
                     opcode: 'getPredict',
                     blockType: BlockType.REPORTER,
-                    text: '[TEXT] から [PREDICTTYPE] の名前を探す',
+                    text: '[TEXT] から [PREDICTTYPE] の名前を見つける',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
