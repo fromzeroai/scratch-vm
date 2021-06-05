@@ -70,7 +70,7 @@ class Scratch3FromZeroAi {
             blockIconURI: blockIconURI,
 
             blocks: [
-                {
+                /*{
                     opcode: 'getPredict',
                     blockType: BlockType.REPORTER,
                     text: '[TEXT] から [PREDICTTYPE] の名前を見つける',
@@ -85,33 +85,33 @@ class Scratch3FromZeroAi {
                             defaultValue: TYPE1_ID
                         }
                     }
-                },
+                },*/
                 {
-                    opcode: 'setExp1',
+                    opcode: 'getPredict1',
                     blockType: BlockType.REPORTER,
-                    text: '【例1 人】 [TEXT]',
+                    text: '[TEXT] から人の名前を見つける',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
-                            defaultValue: "山田太郎の夢はオリンピック選手になることです。"
+                            defaultValue: "私の名前は山田太郎です。"
                         }
                     }
                 },
                 {
-                    opcode: 'setExp2',
+                    opcode: 'getPredict2',
                     blockType: BlockType.REPORTER,
-                    text: '【例2 場所】 [TEXT]',
+                    text: '[TEXT] から場所の名前を見つける',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
-                            defaultValue: "日本にアメリカのオリンピック選手が来ました。"
+                            defaultValue: "日本にアメリカ人が来ました。"
                         }
                     }
                 },
                 {
-                    opcode: 'setExp3',
+                    opcode: 'getPredict3',
                     blockType: BlockType.REPORTER,
-                    text: '【例3 色】 [TEXT]',
+                    text: '[TEXT] から色の名前を見つける',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
@@ -143,12 +143,12 @@ class Scratch3FromZeroAi {
      * @param {*} args
      * @returns
      */
-    getPredict( args ) {
+    getPredict1( args ) {
         const text = Cast.toString(args.TEXT);
-        const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
+        //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
 
         var predict = {
-            PredictType: predictType,
+            PredictType: 1,
             Text: text
         }
 
@@ -177,20 +177,74 @@ class Scratch3FromZeroAi {
         return pr;
     }
 
-    setExp1( args ) {
+    getPredict2( args ) {
         const text = Cast.toString(args.TEXT);
-        return text;
+        //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
+
+        var predict = {
+            PredictType: 2,
+            Text: text
+        }
+
+        const path = "https://fzscratch.azurewebsites.net/api/predict/";
+        //const path = "https://localhost:5001/api/predict/";
+
+        var pr = fetch(path, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(predict)
+        })
+        .then(res => res.json())
+        .then(function(data) {
+            console.log(data);
+            var result = data["predict"];
+            if (result === ""){
+                result = "見つかりません";
+            }
+            return result;
+        })
+        .catch(err => 'エラー');
+
+        return pr;
     }
 
-    setExp2( args ) {
+    getPredict3( args ) {
         const text = Cast.toString(args.TEXT);
-        return text;
+        //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
+
+        var predict = {
+            PredictType: 3,
+            Text: text
+        }
+
+        const path = "https://fzscratch.azurewebsites.net/api/predict/";
+        //const path = "https://localhost:5001/api/predict/";
+
+        var pr = fetch(path, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(predict)
+        })
+        .then(res => res.json())
+        .then(function(data) {
+            console.log(data);
+            var result = data["predict"];
+            if (result === ""){
+                result = "見つかりません";
+            }
+            return result;
+        })
+        .catch(err => 'エラー');
+
+        return pr;
     }
 
-    setExp3( args ) {
-        const text = Cast.toString(args.TEXT);
-        return text;
-    }
 }
 
 module.exports = Scratch3FromZeroAi;
