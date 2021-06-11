@@ -147,7 +147,13 @@ class Scratch3FromZeroAi {
         const text = Cast.toString(args.TEXT);
         //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
 
+        var url = new URL(window.location.href);
+        var params = url.searchParams;
+        const key = params.get('key');
+        console.log(key);
+
         var predict = {
+            Key: key,
             PredictType: 1,
             Text: text
         }
@@ -181,7 +187,13 @@ class Scratch3FromZeroAi {
         const text = Cast.toString(args.TEXT);
         //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
 
+        var url = new URL(window.location.href);
+        var params = url.searchParams;
+        const key = params.get('key');
+        console.log(key);
+
         var predict = {
+            Key: key,
             PredictType: 2,
             Text: text
         }
@@ -215,7 +227,13 @@ class Scratch3FromZeroAi {
         const text = Cast.toString(args.TEXT);
         //const predictType = this.PREDICT_TYPE_INFO[args.PREDICTTYPE].predictType;
 
+        var url = new URL(window.location.href);
+        var params = url.searchParams;
+        const key = params.get('key');
+        console.log(key);
+
         var predict = {
+            Key: key,
             PredictType: 3,
             Text: text
         }
